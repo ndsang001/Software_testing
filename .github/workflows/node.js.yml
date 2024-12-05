@@ -1,0 +1,24 @@
+name: Node.js CI
+
+run-name: ${{ github.actor }} is testing out Software Testing Project 🚀
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - run: npm ci
+      - run: npm test
+      - name: Generate Coverage
+        run: npm run coverage
+      - name: Upload Coverage to Coveralls
+        run: coveralls < coverage/lcov.info
