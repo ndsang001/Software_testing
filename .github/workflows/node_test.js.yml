@@ -3,6 +3,8 @@
 
 name: Node.js CI
 
+run-name: ${{ github.actor }} is testing now 🚀
+
 on:
   push:
     branches: [ "main" ]
