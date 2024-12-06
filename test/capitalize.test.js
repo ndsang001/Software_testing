@@ -6,7 +6,6 @@ jest.mock('../src/toString.js', () => {
 });
 
 import capitalize from '../src/capitalize.js';
-import toString from '../src/toString.js'; // Import the mocked module
 
 describe('capitalize', () => {
     test('should capitalize the first character and lowercase the rest', () => {
@@ -31,5 +30,22 @@ describe('capitalize', () => {
     test('should handle strings with special characters', () => {
         expect(capitalize('!hello')).toBe('!hello');
         expect(capitalize('123abc')).toBe('123abc');
+    });
+
+    // Additional Test Cases from the Good Test File
+    test('should handle a string with only one character', () => {
+        expect(capitalize('a')).toBe('A');
+    });
+
+    test('should handle a string with leading and trailing spaces', () => {
+        expect(capitalize('  test  ')).toBe('  test  ');
+    });
+
+    test('should handle a string with mixed case characters', () => {
+        expect(capitalize('MiXeD')).toBe('Mixed');
+    });
+
+    test('should handle a sentence with mixed case words', () => {
+        expect(capitalize('the qUick brown fox')).toBe('The quick brown fox');
     });
 });

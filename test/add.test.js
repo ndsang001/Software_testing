@@ -33,5 +33,28 @@ describe('add', () => {
         expect(add(null, null)).toBe(0); // null = 0
         expect(add(null, 5)).toBe(5); // null = 0
     });
-    
+
+    test('should add two negative numbers', () => {
+        expect(add(-10, -4)).toBe(-14);
+    });
+
+    test('should add a positive number and zero', () => {
+        expect(add(7, 0)).toBe(7);
+    });
+
+    test('should add zero and a negative number', () => {
+        expect(add(0, -10)).toBe(-10);
+    });
+
+    test('should add two floating-point numbers', () => {
+        expect(add(3.4, 3.6)).toBe(7);
+    });
+
+    test('should add two large positive numbers', () => {
+        expect(add(9999999999, 1)).toBe(10000000000);
+    });
+
+    test('should add two large negative numbers', () => {
+        expect(add(-9999999999, -1)).toBe(-10000000000);
+    });
 });
