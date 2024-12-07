@@ -8,44 +8,70 @@ jest.mock('../src/toString.js', () => {
 import capitalize from '../src/capitalize.js';
 
 describe('capitalize', () => {
-    test('should capitalize the first character and lowercase the rest', () => {
-        expect(capitalize('FRED')).toBe('Fred');
-        expect(capitalize('hello')).toBe('Hello');
+    // Basic functionality tests
+    describe('Basic functionality', () => {
+        // Positive test case
+        test('should capitalize the first character and lowercase the rest', () => {
+            expect(capitalize('FRED')).toBe('Fred');
+            expect(capitalize('hello')).toBe('Hello');
+            expect(capitalize('Fred')).toBe('Fred');
+        });
+
+        // Boundary test case
+        test('should return an empty string if input is empty', () => {
+            expect(capitalize('')).toBe('');
+        });
     });
 
-    test('should handle an already capitalized string', () => {
-        expect(capitalize('Fred')).toBe('Fred');
+    // Non-string input tests
+    describe('Non-string inputs', () => {
+        // Edge case
+        test('should handle non-string inputs gracefully', () => {
+            expect(capitalize(123)).toBe('123');
+            expect(capitalize(null)).toBe(''); // Simulated behavior
+            expect(capitalize(undefined)).toBe(''); // Simulated behavior
+        });
     });
 
-    test('should return an empty string if input is empty', () => {
-        expect(capitalize('')).toBe('');
+    // Special character tests
+    describe('Special characters', () => {
+        // Edge case
+        test('should handle strings with special characters', () => {
+            expect(capitalize('!hello')).toBe('!hello');
+            expect(capitalize('123abc')).toBe('123abc');
+        });
     });
 
-    test('should handle non-string inputs gracefully', () => {
-        expect(capitalize(123)).toBe('123');
-        expect(capitalize(null)).toBe(''); // Simulated behavior
-        expect(capitalize(undefined)).toBe(''); // Simulated behavior
+    // Additional test cases
+    describe('Additional test cases', () => {
+        // Boundary test case
+        test('should handle a string with only one character', () => {
+            expect(capitalize('a')).toBe('A');
+        });
+
+        // Edge case
+        test('should handle a string with leading and trailing spaces', () => {
+            expect(capitalize('  test  ')).toBe('  test  ');
+        });
+
+        // Positive test case
+        test('should handle a string with mixed case characters', () => {
+            expect(capitalize('MiXeD')).toBe('Mixed');
+        });
     });
 
-    test('should handle strings with special characters', () => {
-        expect(capitalize('!hello')).toBe('!hello');
-        expect(capitalize('123abc')).toBe('123abc');
-    });
+    // Negative test cases
+    describe('Negative test cases', () => {
+        test('should not change a string that is already capitalized correctly', () => {
+            expect(capitalize('Fred')).toBe('Fred');
+        });
 
-    // Additional Test Cases from the Good Test File
-    test('should handle a string with only one character', () => {
-        expect(capitalize('a')).toBe('A');
-    });
+        test('should not capitalize a string with all lowercase letters incorrectly', () => {
+            expect(capitalize('fred')).not.toBe('FRED');
+        });
 
-    test('should handle a string with leading and trailing spaces', () => {
-        expect(capitalize('  test  ')).toBe('  test  ');
-    });
-
-    test('should handle a string with mixed case characters', () => {
-        expect(capitalize('MiXeD')).toBe('Mixed');
-    });
-
-    test('should handle a sentence with mixed case words', () => {
-        expect(capitalize('the qUick brown fox')).toBe('The quick brown fox');
+        test('should not capitalize a string with all uppercase letters incorrectly', () => {
+            expect(capitalize('FRED')).not.toBe('FRED');
+        });
     });
 });

@@ -12,7 +12,8 @@ const getTriggeredFiles = () => {
             .filter(file =>
                 file.endsWith(".js") &&
                 file.startsWith("src/") &&
-                !file.includes("src/.internal/"));
+                !file.startsWith("src/.internal/")
+            );
     } catch (error) {
         console.error("Error detecting triggered files:", error.message);
         return [];
@@ -24,6 +25,10 @@ module.exports = {
     collectCoverage: true,
     collectCoverageFrom: getTriggeredFiles(),
     coverageDirectory: "coverage",
+    coveragePathIgnorePatterns: [
+        "/node_modules/",
+        "src/.internal/"
+    ],
     transform: {
         "^.+\\.js$": "babel-jest",
     },
