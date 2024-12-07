@@ -9,7 +9,10 @@ const getTriggeredFiles = () => {
         // Filter files to include only relevant .js files
         return output
             .split("\n")
-            .filter(file => file.endsWith(".js") && file.startsWith("src/"));
+            .filter(file =>
+                file.endsWith(".js") &&
+                file.startsWith("src/") &&
+                !file.includes("src/.internal/"));
     } catch (error) {
         console.error("Error detecting triggered files:", error.message);
         return [];
