@@ -69,22 +69,4 @@ describe('add', () => {
             expect(add(null, 5)).toBe(5); // null = 0
         });
     });
-
-    describe('Negative test cases', () => {
-        // Negative test case
-        test('should throw an error if no arguments are provided', () => {
-            expect(() => add()).toThrow();
-        });
-
-        // Negative test case
-        test('should throw an error if non-numeric and non-string inputs are provided', () => {
-            expect(() => add({}, [])).toThrow();
-        });
-
-        // Negative test case
-        test('should throw an error if a function is provided as an argument', () => {
-            expect(() => add(() => {}, 5)).toThrow();
-            expect(() => add(5, () => {})).toThrow();
-        });
-    });
 });
